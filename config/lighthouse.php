@@ -50,6 +50,10 @@ return [
         // 'where' => [],
     ],
 
+    'directives' => [
+        // Autres directives personnalisées...
+        'bcrypt' => \App\GraphQL\Directives\BcryptDirective::class,
+    ],
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards
