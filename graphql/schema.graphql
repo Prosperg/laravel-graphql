@@ -15,8 +15,13 @@ type Article {
 type Query {
   user(id: ID! @eq): User @find
   users: [User!] @paginate(defaultCount:10)
+
+  #---articles
   article(id: ID! @eq): Article @find
   articles: [Article!] @paginate(defaultCount: 10)
+
+  #----me
+  me: User @auth
 }
 
 type PaginatorInfo {
@@ -36,6 +41,12 @@ type Mutation {
     email: String! @rules(apply: ["email", "unique:users"])
     password: String! @rules(apply: ["min:6"]) @bcrypt
   ): User @create
+
+  #Authentification et authorisation GraphQL
+  login(
+    email: String!
+    password: String!
+    ): String @field(resolver: "AuthMutator@resolve")
 }
 
 
